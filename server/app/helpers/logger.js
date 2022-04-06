@@ -22,7 +22,7 @@ const bunyan = require('bunyan');
  */
 
 const logger = bunyan.createLogger({
-  name: 'olleks',
+  name: 'Eole-Edit Project',
   streams: [
     {
       level: 'error', // ? We keep only the logs from the error level
