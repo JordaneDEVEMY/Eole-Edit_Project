@@ -2,23 +2,13 @@ const express = require('express');
 const path = require('path');
 const multer = require('multer');
 
-const { controller } = require('../controllers');
+const { controller } = require('../controllers/filesController');
 const controllerHandler = require('../helpers/controllerHandler');
 const { ApiError } = require('../helpers/errorHandler');
 
 const router = express.Router();
 
 const { uploadVideo } = require('../helpers/uploadVideos');
-// !
-router
-  .route('/')
-  /**
-   * GET /
-   * @summary Test API connection
-   * @tags TEST
-   */
-  .get((_, res) => { res.send('API is working'); });
-// !
 
 // Multer configuration
 const videoStorage = multer.diskStorage({
@@ -51,8 +41,16 @@ router
    * @summary Upload route to upload a file and create a low-res version of it
    * @tags UPLOAD
    */
-  // .post(videoUpload.single('video'), (req, res) => res.send(req.file));
-  .post(videoUpload.single('video'), controllerHandler(uploadVideo));
+  .post(videoUpload.single('video'), controllerHandler(uploadVideo), controllerHandler(controller.deleteFullRes));
+
+router
+  .route('/files')
+  /**
+   * GET /files
+   * @summary Files route to see all low-res files
+   * @tags FILES
+   */
+  .get(controllerHandler(controller.getAll));
 
 router.use(() => {
   throw new ApiError(404, '404 NOT FOUND');

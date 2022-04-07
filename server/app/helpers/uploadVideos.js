@@ -1,38 +1,35 @@
 const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
 const ffmpeg = require('fluent-ffmpeg');
+const debug = require('debug')('uploadVideos:logs');
+
 const { ApiError } = require('./errorHandler');
 
 ffmpeg.setFfmpegPath(ffmpegPath);
 
-const uploadVideo = (req, res) => {
-  const outputPathSmall = `${__dirname}/../public/uploads/480/`;
-  const outputPathMed = `${__dirname}/../public/uploads/768/`;
-  const outputPathLar = `${__dirname}/../public/uploads/1080/`;
+const uploadVideo = (req, res, next) => {
+  const lowRes = process.env.LOW_RES;
+
+  const outputPath = `${__dirname}/../public/uploads/compressed-videos/`;
 
   ffmpeg()
     .input(req.file.path)
     .videoCodec('libx264')
-    .output(outputPathLar + req.file.filename)
-    .size('1080x?')
 
-    .output(outputPathMed + req.file.filename)
-    .size('768x?')
-
-    .output(outputPathSmall + req.file.filename)
-    .size('320x?')
+    .output(outputPath + req.file.filename)
+    .size(`${lowRes}x?`)
 
     .on('start', () => {
-      console.log('Videos converting in progress...');
+      debug('Videos converting in progress...');
     })
     .on('end', () => {
-      console.log('Videos converted');
-      res.end();
+      debug('Videos converted');
+      next();
     })
     .on('error', (err) => {
       throw new ApiError(err);
     })
 
-    .exec(); // .run()
+    .exec();
 };
 
 module.exports = {
