@@ -8,6 +8,7 @@ const { ApiError } = require('../helpers/errorHandler');
 
 const router = express.Router();
 
+const { uploadVideo } = require('../helpers/uploadVideos');
 // !
 router
   .route('/')
@@ -50,7 +51,8 @@ router
    * @summary Upload route to upload a file and create a low-res version of it
    * @tags UPLOAD
    */
-  .post(videoUpload.single('video'), (req, res) => res.send(req.file));
+  // .post(videoUpload.single('video'), (req, res) => res.send(req.file));
+  .post(videoUpload.single('video'), controllerHandler(uploadVideo));
 
 router.use(() => {
   throw new ApiError(404, '404 NOT FOUND');
