@@ -8,20 +8,12 @@ const UploadsList = ({ medias }) => {
   return (
     <div className="row">
       <div className="col-md-12">
-        <ul style={{listStyleType: "none"}}>
+        <ul>
           {medias &&
             medias.map((video) => {
               return (
                   <li key={video.slice(6, 19)}>
-                      <video
-                        preload="auto"
-                        width="320"
-                        height="240"
-                        controls
-                      >
-                        <source src={`${BACKEND_URI}/uploads/compressed-videos/${video}`} />
-                        Your browser does not support the video tag.
-                      </video>
+                  <a href={`${BACKEND_URI}/uploads/compressed-videos/${video}`} >{video}</a>
                   </li>
               )
             })}
@@ -37,4 +29,4 @@ UploadsList.propTypes = {
 UploadsList.defaultProps = {
 };
 
-export default UploadsList;
+export default React.memo(UploadsList);
