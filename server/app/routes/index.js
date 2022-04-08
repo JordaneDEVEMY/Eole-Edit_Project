@@ -26,8 +26,8 @@ const videoUpload = multer({
     fileSize: 500000000, // 10000000 Bytes = 500 MB
   },
   fileFilter(_, file, cb) {
-    // upload only mp4 and mkv format
-    if (!file.originalname.match(/\.(mp4|mov|MPEG-4|mkv)$/)) {
+    // upload only mp4, mov and mkv format
+    if (!file.originalname.match(/\.(mp4|MPEG-4|mov|mkv)$/)) {
       return cb(new Error('Please upload a video'));
     }
     return cb(undefined, true);
