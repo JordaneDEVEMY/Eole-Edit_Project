@@ -26,9 +26,9 @@ const controller = {
         files.splice(emptyFile, 1);
       }
 
-      const filesWithPath = files.map((file) => directoryPath.concat(file));
+      // const filesWithPath = files.map((file) => directoryPath.concat(file));
 
-      return res.json(filesWithPath);
+      return res.json(files);
     });
   },
 

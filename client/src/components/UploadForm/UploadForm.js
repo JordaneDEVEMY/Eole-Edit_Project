@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 import './uploadForm.scss';
 import { BACKEND_URI } from "../../config/constants";
 
-const UploadForm = () => {
-  const [name, setName] = useState("");
+const UploadForm = ({ getAllMedias }) => {
   const [video, setVideo] = useState([]);
 
   const handleSubmit = (e) => {
@@ -17,11 +16,10 @@ const UploadForm = () => {
       formdata.append("video", video[key]);
     }
 
-    formdata.append("name", name);
-
     axios
       .post(`${BACKEND_URI}/upload`, formdata)
       .then((success) => {
+        getAllMedias();
         alert("Submitted successfully");
       })
       .catch((error) => {
