@@ -27,7 +27,7 @@ const videoUpload = multer({
   },
   fileFilter(_, file, cb) {
     // upload only mp4, mov and mkv format
-    if (!file.originalname.match(/\.(mp4|MPEG-4|mov|mkv)$/)) {
+    if (!file.originalname.match(/\.(mp4|MPEG-4|mov|mkv|wmv|flv|gif)$/)) {
       return cb(new Error('Please upload a video'));
     }
     return cb(undefined, true);
