@@ -1,23 +1,21 @@
-import './App.css';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-function App() {
+import UploadForm from '../UploadForm/UploadForm.js';
+
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <UploadForm />
     </div>
   );
+
 }
 
-export default App;
+App.propTypes = {
+};
+
+App.defaultProps = {
+};
+
+export default React.memo(App);
