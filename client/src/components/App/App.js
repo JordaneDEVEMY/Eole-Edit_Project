@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from "axios";
 
+import AppHeader from '../AppHeader/AppHeader.js';
 import UploadForm from '../UploadForm/UploadForm.js';
 import UploadsList from '../UploadsList/UploadsList.js';
 import UploadsVideosList from '../UploadsVideosList/UploadsVideosList.js';
+
 import { BACKEND_URI } from "../../config/constants";
 
 const App = () => {
@@ -29,7 +31,10 @@ const App = () => {
 
   return (
     <>
-    <div className="row">
+    <AppHeader />
+
+    <div className="column">
+
       <div className="col-md-6">
         <div
           className="card"
@@ -45,6 +50,7 @@ const App = () => {
           </div>
         </div>
       </div>
+
       <div className="col-md-6">
         <div
           className="card"
@@ -60,6 +66,7 @@ const App = () => {
           </div>
         </div>
       </div>
+
       <div className="col-md-6">
         <div
           className="card"
@@ -75,6 +82,7 @@ const App = () => {
           </div>
         </div>
       </div>
+
     </div>
   </>
   );
