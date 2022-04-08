@@ -19,10 +19,10 @@ const uploadVideo = (req, res, next) => {
     .size(`${lowRes}x?`)
 
     .on('start', () => {
-      debug('Videos converting in progress...');
+      debug('Video converting in progress...');
     })
     .on('end', () => {
-      debug('Videos converted');
+      debug('Video converted');
       next();
     })
     .on('error', (err) => {
