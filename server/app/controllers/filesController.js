@@ -5,7 +5,7 @@ const { ApiError } = require('../helpers/errorHandler');
 
 const controller = {
   /**
-   * Controller to get all path of compresses-videos
+   * Controller to get all path of compressed-videos
    * ExpressMiddleware signature
    * @param {object} res Express response object
    * @returns {string} Route API JSON response
@@ -33,7 +33,7 @@ const controller = {
   },
 
   /**
-   * Controller to get all path of compresses-videos
+   * Controller to delete the path of a compressed video
    * ExpressMiddleware signature
    * @param {object} res Express response object
    * @returns {string} Route API JSON response
