@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const multer = require('multer');
 
 const { controller } = require('../controllers/filesController');
@@ -16,7 +15,7 @@ const videoStorage = multer.diskStorage({
     cb(null, `${__dirname}/../public`);
   },
   filename(_, file, cb) {
-    cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`);
+    cb(null, `${file.originalname}`);
   },
 });
 
