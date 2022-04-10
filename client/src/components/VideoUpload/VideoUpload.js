@@ -76,7 +76,7 @@ const FileUpload = ({ getAllMedias }) => {
           </label>
           <p className="text-muted">
             <small>
-              Supported formats : .mp4, .MPEG-4, .mov, .mkv, .wmv, .flv, .gif
+              Supported formats : .mp4, .MPEG-4, .mov, .mkv, .wmv and .flv
             </small>
           </p>
         </div>

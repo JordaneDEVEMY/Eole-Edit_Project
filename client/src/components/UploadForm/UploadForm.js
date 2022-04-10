@@ -47,7 +47,7 @@ const UploadForm = ({ getAllMedias }) => {
             custom
       />
       <Form.Text className="text-muted">
-      Supported formats : .mp4, .MPEG-4, .mov, .mkv, .wmv, .flv, .gif
+      Supported formats : .mp4, .MPEG-4, .mov, .mkv, .wmv, .flv
       </Form.Text>
     </Form.Group>
 
