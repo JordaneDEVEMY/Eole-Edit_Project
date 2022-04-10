@@ -1,0 +1,25 @@
+{
+  "name": "eole-edit_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"yarn start-frontend || npm run start-frontend\" \"yarn start-backend || npm run start-backend\"",
+    "start-backend": "cd server && npm run start",
+    "start-frontend": "cd client && yarn start && cd .."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JordaneDEVEMY/Eole-Edit_Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JordaneDEVEMY/Eole-Edit_Project/issues"
+  },
+  "homepage": "https://github.com/JordaneDEVEMY/Eole-Edit_Project#readme",
+  "dependencies": {
+    "concurrently": "^7.1.0"
+  }
+}
