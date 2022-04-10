@@ -7,6 +7,10 @@ import Button from 'react-bootstrap/Button'
 
 import { BACKEND_URI } from "../../config/constants";
 
+// Importing toastify module
+import { toast } from 'react-toastify';
+toast.configure()
+
 const UploadForm = ({ getAllMedias }) => {
   const [video, setVideo] = useState([]);
 
@@ -22,11 +26,11 @@ const UploadForm = ({ getAllMedias }) => {
       .post(`${BACKEND_URI}/upload`, formdata)
       .then((success) => {
         getAllMedias();
-        alert("Submitted successfully");
+        toast("Submitted successfully");
       })
       .catch((error) => {
         console.log(error);
-        alert("Error happened !");
+        toast("Error happened !");
       });
   };
 

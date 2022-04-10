@@ -16,7 +16,7 @@ const UploadsList = ({ medias }) => {
                   </li>
               )
             })
-            : <p>Upload videos and you'll see it here.</p>
+            : <p>No video uploaded</p>
           }
         </ul>
       </div>
