@@ -7,12 +7,12 @@ const UploadsList = ({ medias }) => {
   return (
     <div className="row">
       <div className="col-md-12">
-        <ul>
+        <ul style={{ listStyleType: "none"}} >
           {medias.length > 0
             ? medias.map((video) => {
               return (
                   <li key={video.slice(6, 19)}>
-                  <a href={`${BACKEND_URI}/uploads/compressed-videos/${video}`} >{video}</a>
+                  <button href={`${BACKEND_URI}/uploads/compressed-videos/${video}`} >&#9658; {video}</button>
                   </li>
               )
             })
