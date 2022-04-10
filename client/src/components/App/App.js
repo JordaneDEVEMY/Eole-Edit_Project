@@ -45,19 +45,26 @@ const App = () => {
       <VideoUpload getAllMedias={getAllMedias} />
     </div>
 
-    <div className='container mt-4'>
-      <h4 className='display-4 mb-4'>
-      Videos List :
-      </h4>
-      <UploadsList medias={medias} getVideoPlayerLink={getVideoPlayerLink} />
-    </div>
+    { medias.length > 0 
+      ? 
+        <div className='container mt-4'>
+          <h4 className='display-4 mb-4'>
+          Videos List :
+          </h4>
+          <UploadsList medias={medias} getVideoPlayerLink={getVideoPlayerLink} />
+        </div>
+      : null }
 
-    <div className='container mt-4'>
-      <h4 className='display-4 mb-4'>
-      Videos List :
-      </h4>
-      <VideoPlayer videoSrc={videoLink} />
-    </div>
+    { videoLink 
+      ? 
+        <div className='container mt-4'>
+          <h4 className='display-4 mb-4'>
+          Video Player :
+          </h4>
+          <VideoPlayer videoSrc={videoLink} />
+        </div>
+      : null }
+
     </>
   );
 } 
