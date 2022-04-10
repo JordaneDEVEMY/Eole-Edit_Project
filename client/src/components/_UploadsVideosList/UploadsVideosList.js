@@ -9,8 +9,8 @@ const UploadsVideosList = ({ medias }) => {
     <div className="row">
       <div className="col-md-12">
         <ul style={{listStyleType: "none"}}>
-          {medias &&
-            medias.map((video) => {
+        {medias.length > 0
+            ? medias.map((video) => {
               return (
                   <li key={video.slice(6, 19)}>
                       <video
@@ -24,7 +24,9 @@ const UploadsVideosList = ({ medias }) => {
                       </video>
                   </li>
               )
-            })}
+            })
+            : <p>Upload videos and you'll see it here.</p>
+          }
         </ul>
       </div>
     </div>

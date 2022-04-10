@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const multer = require('multer');
 
 const { controller } = require('../controllers/filesController');
@@ -16,7 +15,7 @@ const videoStorage = multer.diskStorage({
     cb(null, `${__dirname}/../public`);
   },
   filename(_, file, cb) {
-    cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`);
+    cb(null, `${file.originalname}`);
   },
 });
 
@@ -27,7 +26,7 @@ const videoUpload = multer({
   },
   fileFilter(_, file, cb) {
     // upload only mp4, mov and mkv format
-    if (!file.originalname.match(/\.(mp4|MPEG-4|mov|mkv)$/)) {
+    if (!file.originalname.match(/\.(mp4|MPEG-4|mov|mkv|wmv|flv|gif)$/)) {
       return cb(new Error('Please upload a video'));
     }
     return cb(undefined, true);

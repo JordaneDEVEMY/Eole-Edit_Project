@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import axios from "axios";
 import PropTypes from 'prop-types';
 
-import './uploadForm.scss';
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+
 import { BACKEND_URI } from "../../config/constants";
+
+// Importing toastify module
+import { toast } from 'react-toastify';
+toast.configure()
 
 const UploadForm = ({ getAllMedias }) => {
   const [video, setVideo] = useState([]);
@@ -20,36 +26,35 @@ const UploadForm = ({ getAllMedias }) => {
       .post(`${BACKEND_URI}/upload`, formdata)
       .then((success) => {
         getAllMedias();
-        alert("Submitted successfully");
+        toast("Submitted successfully");
       })
       .catch((error) => {
         console.log(error);
-        alert("Error happened !");
+        toast("Error happened !");
       });
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <div className="form">
-          <label htmlFor="video">Upload Video</label>
-          <input
+  <Form onSubmit={handleSubmit}>
+    <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Label htmlFor="video">Upload your video :</Form.Label>
+      <Form.Control
             type="file"
+            className="form-control"
             name="video"
             id="video"
-            className="form-control"
-            accept=".mp4, .mov, .MPEG-4, .mkv"
-            onChange={(e) => {
-              setVideo(e.target.files);
-            }}
-          />
-        </div>
+            onChange={(e) => setVideo(e.target.files)}
+            custom
+      />
+      <Form.Text className="text-muted">
+      Supported formats : .mp4, .MPEG-4, .mov, .mkv, .wmv, .flv, .gif
+      </Form.Text>
+    </Form.Group>
 
-        <button type="submit" className="btn btn-primary mt-2">
-          Submit
-        </button>
-      </form>
-    </>
+    <Button variant="primary" type="submit">
+      Submit
+    </Button>
+  </Form>
   );
 };
 
