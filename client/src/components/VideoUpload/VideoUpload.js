@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { div, useState } from 'react';
 import ToastMessage from '../ToastMessage/ToastMessage';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import axios from 'axios';
@@ -8,7 +8,6 @@ import { BACKEND_URI } from "../../config/constants";
 const FileUpload = ({ getAllMedias }) => {
   const [file, setFile] = useState('');
   const [filename, setFilename] = useState('Choose File');
-  const [uploadedFile, setUploadedFile] = useState({});
   const [message, setMessage] = useState('');
   const [uploadPercentage, setUploadPercentage] = useState(0);
 
@@ -23,14 +22,14 @@ const FileUpload = ({ getAllMedias }) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append('video', file);
-
+    
     if (!file) {
       setMessage('Video file is required');
       return;
     }
     
     try {
-      const res = await axios
+      await axios
       .post(`${BACKEND_URI}/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -49,10 +48,6 @@ const FileUpload = ({ getAllMedias }) => {
       // Clear percentage
       setTimeout(() => setUploadPercentage(0), 2500);
 
-      const { fileName, filePath } = res.data;
-
-      setUploadedFile({ fileName, filePath });
-
       setMessage('File Uploaded');
     } catch (err) {
       if (err.response.status === 500) {
@@ -65,7 +60,7 @@ const FileUpload = ({ getAllMedias }) => {
   };
 
   return (
-    <Fragment>
+    <div>
       {message ? <ToastMessage msg={message} /> : null}
       <form onSubmit={onSubmit}>
         <div className='custom-file mb-4'>
@@ -81,7 +76,7 @@ const FileUpload = ({ getAllMedias }) => {
           </label>
           <p className="text-muted">
             <small>
-              Supported formats : .mp4, .MPEG-4, .mov, .mkv, .wmv, .flv, .gif
+              Supported formats : .mp4, .MPEG-4, .mov, .mkv, .wmv and .flv
             </small>
           </p>
         </div>
@@ -94,15 +89,7 @@ const FileUpload = ({ getAllMedias }) => {
           className='btn btn-primary btn-block mt-4'
         />
       </form>
-      {uploadedFile ? (
-        <div className='row mt-5'>
-          <div className='col-md-6 m-auto'>
-            <h3 className='text-center'>{uploadedFile.fileName}</h3>
-            <img style={{ width: '100%' }} src={uploadedFile.filePath} alt='' />
-          </div>
-        </div>
-      ) : null}
-    </Fragment>
+    </div>
   );
 };
 
