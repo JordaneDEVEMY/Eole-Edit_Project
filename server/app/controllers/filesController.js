@@ -26,8 +26,6 @@ const controller = {
         files.splice(emptyFile, 1);
       }
 
-      // const filesWithPath = files.map((file) => directoryPath.concat(file));
-
       return res.json(files);
     });
   },
@@ -55,6 +53,7 @@ const controller = {
       }
       fs.unlink(directoryPath + files[0], (error) => {
         if (error) {
+          // eslint-disable-next-line no-console
           console.error(error);
         }
       });

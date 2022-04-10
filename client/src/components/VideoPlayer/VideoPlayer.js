@@ -1,18 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-
-const VideoPlayer = ({ videoSrc }) => {
-  
+function VideoPlayer({ videoSrc }) {
   const videoRef = useRef();
 
   useEffect(() => {
     videoRef.current?.load();
-  }, [videoSrc])
+  }, [videoSrc]);
 
   return (
     <div className="row">
-      <div className="col-md-12">
+      <div className="col-md-12 container d-flex justify-content-center">
         <video
           ref={videoRef}
           preload="auto"
@@ -20,15 +18,20 @@ const VideoPlayer = ({ videoSrc }) => {
           height="480"
           controls
         >
-          <source src={videoSrc}/>
+          <track
+            default
+            kind="captions"
+          />
+          <source src={videoSrc} />
           Your browser does not support the video tag.
-        </video> 
+        </video>
       </div>
     </div>
   );
-};
+}
 
 VideoPlayer.propTypes = {
+  videoSrc: PropTypes.string.isRequired,
 };
 
 VideoPlayer.defaultProps = {
