@@ -2,13 +2,18 @@
 
 ## Getting Started
 
-In the root directory of the project...
-
+In the CLIENT directory of the project...
 1. Install node modules `yarn install` or `npm install`.
-2. Start development server `yarn start` or `npm start`.
-3. Create a .env file in server like the .env.example (keep PORT on 4000 please.)
 
+In the SERVER directory of the project...
+1. Install node modules `yarn install` or `npm install`.
+2. Create a .env file in server like the .env.example (keep PORT on 4000 please.)
 If you want, you can change the LOW_RES with the resolution that you want.
+
+Then, 
+In the root directory of the project...
+1. Install node modules `yarn install` or `npm install`.
+2. Start app `yarn start` or `npm start`.
 
 ## File Structure
 
