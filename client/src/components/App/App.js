@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 
 import VideoUpload from '../VideoUpload/VideoUpload';
@@ -7,18 +7,27 @@ import VideoPlayer from '../VideoPlayer/VideoPlayer';
 
 import { BACKEND_URI } from '../../config/constants';
 
-function App() {
-  const [medias, setMedias] = useState([]);
-  const [videoLink, setVideoLink] = useState('');
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      medias: [],
+      videoLink: '',
+    };
+  }
 
-  const getAllMedias = () => {
+  getAllMedias = () => {
     axios
       .get(`${BACKEND_URI}/files`)
       .then((result) => {
-        setMedias(result.data);
+        this.setState({
+          medias: result.data,
+        });
       })
       .catch((error) => {
-        setMedias([]);
+        this.setState({
+          medias: [],
+        });
         // eslint-disable-next-line no-console
         console.log(error);
         // eslint-disable-next-line no-alert
@@ -26,51 +35,58 @@ function App() {
       });
   };
 
-  useEffect(() => {
-    getAllMedias();
-  }, []);
-
-  const getVideoPlayerLink = (link) => {
-    setVideoLink(link);
+  getVideoPlayerLink = (link) => {
+    this.setState({
+      videoLink: link,
+    });
   };
 
-  return (
-    <>
-      <div className="container mt-4">
-        <h1 className="display-4 text-center mb-4">
-          <i className="fab fa-react" />
-          {' '}
-          Eole Edit Upload Project
-        </h1>
-        <h2>
-          Upload Videos here :
-        </h2>
-        <VideoUpload getAllMedias={getAllMedias} />
-      </div>
+  render() {
+    const {
+      medias, videoLink,
+    } = this.state;
+    return (
+      <>
+        <div className="container mt-4">
+          <h1 className="display-4 text-center mb-4">
+            <i className="fab fa-react" />
+            {' '}
+            Eole Edit Upload Project
+          </h1>
+          <h2>
+            Upload Videos here :
+          </h2>
+          <VideoUpload getAllMedias={this.getAllMedias} />
+        </div>
 
-      { medias.length > 0
-        ? (
-          <div className="container mt-4">
-            <h2>
-              Videos List :
-            </h2>
-            <UploadsList medias={medias} getVideoPlayerLink={getVideoPlayerLink} />
-          </div>
-        )
-        : null }
+        { medias.length > 0
+          ? (
+            <div className="container mt-4">
+              <h2>
+                Videos List :
+              </h2>
+              <UploadsList
+                medias={medias}
+                getVideoPlayerLink={this.getVideoPlayerLink}
+              />
+            </div>
+          )
+          : null }
 
-      { videoLink
-        ? (
-          <div className="container mt-4">
-            <h2>
-              Video Player :
-            </h2>
-            <VideoPlayer videoSrc={videoLink} />
-          </div>
-        )
-        : null }
+        { videoLink
+          ? (
+            <div className="container mt-4">
+              <h2>
+                Video Player :
+              </h2>
+              <VideoPlayer videoSrc={videoLink} />
+            </div>
+          )
+          : null }
 
-    </>
-  );
+      </>
+    );
+  }
 }
+
 export default App;
